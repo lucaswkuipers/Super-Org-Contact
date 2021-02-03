@@ -1,0 +1,105 @@
+body {
+  font-family: tahoma;
+  color: #282828;
+  margin: 0 auto;
+  min-width: fit-content;
+}
+
+.nav-bar {
+  background: linear-gradient(-90deg, #84cf6a, #16c0b0);
+  height: 60px;
+  margin-bottom: 0px;
+}
+
+.domain-contacts-table {
+  border-collapse: collapse;
+  margin: 25px auto;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  /* min-width: 40px; */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  width: 60%;
+  max-width: 800px;
+}
+
+.domain-contacts-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+.domain-contacts-table th,
+.domain-contacts-table td {
+  padding: 12px 15px;
+}
+
+.domain-contacts-table tbody tr {
+  border-bottom: thin solid #dddddd;
+}
+
+.domain-contacts-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.domain-contacts-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.domain-contacts-table tbody tr:hover {
+  font-weight: bold;
+  color: #009879;
+}
+
+/* for some reason page overflows horizontally without this */
+* {
+  border: 1px transparent #fff !important;
+}
+
+@media (max-width: 600px) {
+  .domain-contacts-table {
+    width: 90%;
+    max-width: 360px;
+  }
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+}
+
+.my-button {
+  width: 80%;
+  margin-left: 10px;
+}
+
+.box-login {
+  width: 80%;
+  margin: auto;
+}
+
+.container.body-content {
+  width: 80%;
+  margin: auto;
+}
+
+/* resizing google's login button */
+div.abcRioButton {
+  width: 80%;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  color: #009879;
+}
+
+a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: grey;
+}
+
+hr {
+  width: 100px;
+}

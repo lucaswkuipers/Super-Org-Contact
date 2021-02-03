@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- #region Meta -->
+	<meta name="description" content="Super OrgContact: Organização de Contatos">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="robots" content="index, follow">
+	<!-- #endregion Meta -->
+
+
+	<link rel="icon" href="./assets/icon.svg">
+	<link rel="stylesheet" href="style.css">
+
+	<title>Super OrgContact: Organização de Contatos</title>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+	<script>document.addEventListener("click", x => 0)</script>
+
+
+
+	<!--TODO: HIDE IDs and API KEYs IN ENVIRONMENT VARIABLES-->
+	<!--Google client ID-->
+	<meta name="google-signin-client_id"
+		content="1051399611278-652d7hbqevum8jf0vj8o5qrnf7t44r5t.apps.googleusercontent.com">
+
+
+
+</head>
+
+<body>
+
+	<!--TODO: HIDE IDs and API KEYs IN ENVIRONMENT VARIABLES-->
+	<!--Google People API Initialization Script-->
+	<script type="text/javascript">
+		// Client ID and API key from the Developer Console
+		var CLIENT_ID = '1051399611278-652d7hbqevum8jf0vj8o5qrnf7t44r5t.apps.googleusercontent.com';
+		var API_KEY = 'AIzaSyB7yV9T8p-U6IdItVLGKSo0tSLPqdYTV6Y';
+
+		// Array of API discovery doc URLs for APIs used by the quickstart
+		var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/people/v1/rest"];
+
+		// Authorization scopes required by the API; multiple scopes can be
+		// included, separated by spaces.
+		var SCOPES = "https://www.googleapis.com/auth/contacts.readonly";
+
+		/**
+		 *  On load, called to load the auth2 library and API client library.
+		 */
+		function handleClientLoad() {
+			gapi.load('client:auth2', initClient);
+		}
+
+		/**
+		 *  Initializes the API client library and sets up sign-in state
+		 *  listeners.
+		 */
+		function initClient() {
+			gapi.client.init({
+				apiKey: API_KEY,
+				clientId: CLIENT_ID,
+				discoveryDocs: DISCOVERY_DOCS,
+				scope: SCOPES
+			}).then(function () {
+				// Listen for sign-in state changes.
+				gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+				// Handle the initial sign-in state.
+				updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+			}, function (error) {
+				appendPre(JSON.stringify(error, null, 2));
+			});
+		}
+
+		/**
+		 *  Called when the signed in status changes, to update the UI
+		 *  appropriately. After a sign-in, the API is called.
+		 */
+		function updateSigninStatus(isSignedIn) {
+			if (isSignedIn) {
+
+				document.getElementById('my-button').style.display = 'none'
+				document.getElementById('login-h2').style.display = 'none'
+
+				contactEmails();
+
+			} else {
+				document.getElementById('my-button').style.display = 'block';
+				document.getElementById('login-h2').style.display = 'block'
+			}
+		}
+
+	</script>
+
+	<header>
+		<div class="nav-bar">
+		</div>
+	</header>
+
+	<article>
+		<!-- Google Login Box -->
+		<div id="auth-div" class="container body-content">
+			<div class="box-login">
+
+				<h2 id="login-h2">Login</h2>
+
+				<!-- Google Login Auth Button -->
+				<div id="my-button"></div>
+
+				<hr />
+				<a href="javascript:void(0);" onclick="signOut();">Sign out</a>
+				<hr />
+
+			</div>
+		</div>
+
+		<div id="app">
+			<table class="domain-contacts-table">
+				<thead>
+					<tr>
+						<th>Domain</th>
+						<th>Emails</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="domain in Object.keys(domainContacts)">
+						<td class="domain-cell">{{domain}}</td>
+						<td>
+							<ul>
+								<li v-for="contact in domainContacts[domain]">
+									{{contact}}
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</article>
+
+	<aside>
+		<div id="stats-graph">
+			<h2>Emails per Domain</h2>
+			<canvas id="chart" width="50%"></canvas>
+		</div>
+	</aside>
+
+
+	<!--Google Platform Library-->
+	<script src=" https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+		</script>
+
+	<!-- TODO: Replace with production version -->
+	<!-- Vue development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+	<script src="main.js"></script>
+</body>
+
+</html>
