@@ -5,4 +5,4 @@ Before Login
 ![before login](before_login.PNG?raw=true)
 
 After login
-![after login](after_login.PNG?raw=true)
+![after login](after_login.png?raw=true)
